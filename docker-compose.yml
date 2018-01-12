@@ -12,6 +12,9 @@ services:
       - './volumes/gitlab/config:/etc/gitlab'
       - './volumes/gitlab/logs:/var/log/gitlab'
       - './volumes/gitlab/data:/var/opt/gitlab'
+    environment:
+      - GITLAB_ROOT_PASSWORD=12345678
+      - GITLAB_HOST=http://gitlab'
     networks:
       le_net:
         ipv4_address: 10.5.0.10
