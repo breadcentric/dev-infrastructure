@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+set -x
+
+echo
+echo fetch token
+echo ===========
+TOKEN=$(curl -XPOST --data "grant_type=password&username=root&password=12345678" http://gitlab/oauth/token | python3 -c "import sys, json; print(json.load(sys.stdin)['access_token'])")
+
+echo create some group
+echo =================
+curl -X POST --header "Authorization: Bearer $TOKEN" --data "name=some&path=some&visibility=internal" http://gitlab/api/v4/groups
+
+echo create user
+echo ===========
+curl -X POST --header "Authorization: Bearer $TOKEN" --data "username=user&name=user&password=12345678&email=user@email&skip_confirmation=true" http://gitlab/api/v4/users
+
+echo add user to some group
+echo ======================
+# shortcut:, user is a second user, so user_id is 2. I could have extracted like in token.
+curl -X POST --header "Authorization: Bearer $TOKEN" --data "user_id=2&access_level=40" http://gitlab/api/v4/groups/some/members
+
+echo create project
+echo ==============
+# shortcut: group_id is 2, I don’t know what namespace_id 1 is and I don’t really care
+curl -X POST --header "Authorization: Bearer $TOKEN" --data "name=project&merge_requests_enabled=yes&namespace_id=2&visibility=internal" http://gitlab/api/v4/projects
+
+echo add ssh key to user
+echo ===================
+# shortcut: user is a second user, so user_id is 2. I could have extracted like in token.
+# shortcut: I’m assuming you have a key pair in ~/.ssh, only one pair, and public key file ends with .pub
+# note that I’m passing the data differently; the key needs to be urlencoded so that pluses aren’t read as space characters
+curl \
+  -X POST \
+  --header "Authorization: Bearer $TOKEN" \
+  -F "title=key" \
+  -F "key=$(cat ~/.ssh/*.pub)" \
+  http://gitlab/api/v4/users/2/keys
+

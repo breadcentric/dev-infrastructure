@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+set -x
+
+ssh-keygen -R gitlab
+ssh-keygen -R 10.5.0.10
+
+sudo rm -rf volumes/gitlab/config/*
+sudo rm -rf volumes/gitlab/data/*
+sudo rm -rf volumes/gitlab/logs/*
