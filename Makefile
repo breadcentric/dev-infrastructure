@@ -1,13 +1,13 @@
-clean: stop
+reset: stop
 	./scripts/gitlab/reset
 
-prepare:
+before-start:
 	./scripts/gitlab/before-start
 
-init:
+after-start:
 	./scripts/gitlab/after-start
 
-start: prepare
+start: before-start
 	docker.compose up -d
 
 stop:
