@@ -1,3 +1,6 @@
+clean: stop
+	./scripts/clean
+
 reset: stop
 	./scripts/gitlab/reset
 
