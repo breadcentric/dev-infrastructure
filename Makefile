@@ -1,8 +1,6 @@
 clean: stop
-	./scripts/clean
-
-reset: stop
 	./scripts/gitlab/reset
+	./scripts/clean
 
 before-start:
 	./scripts/gitlab/before-start
