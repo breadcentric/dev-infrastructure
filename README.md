@@ -1,4 +1,7 @@
-These are resources for Software Development Infrastructure tutorial published on Steemit. See tag [breadcentric-dev-infrastructure](https://steemit.com/created/breadcentric-dev-infrastructure) for the whole series. 
+These are resources for Software Development Infrastructure tutorial published on Steemit. See a list of links for the whole series. 
+# Posts
+* [Software development infrastructure. Part 0x00. Introduction](https://steemit.com/utopian-io/@breadcentric/software-development-infrastructure-part-0x00-introduction)
+* [Software development infrastructure. Part 0x01. Setting things up. Docker.](https://steemit.com/utopian-io/@breadcentric/software-development-infrastructure-part-0x01-setting-things-up-docker)
 
 # Snapshots
 Each part that comes with some code. If there is anything specific for a given stage, I will provide a tag for it.
@@ -8,7 +11,7 @@ The project requires you to have:
 * docker
 * docker-compose
 * make
-* python3
+* python3 (or maybe not)
 
 Maybe some more, but rather not.
 
